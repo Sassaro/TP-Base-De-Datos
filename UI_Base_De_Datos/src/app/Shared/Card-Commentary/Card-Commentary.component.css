@@ -1,0 +1,77 @@
+.cardCommentary{
+    display: flex;
+    width: 80vw;
+    align-items: center;
+    background-color: var(--colorAuxiliar2);
+    border-radius: 10px;
+    border-style: solid;
+    flex-direction: column;
+}
+
+.titulo{
+    font-family: var(--fuenteSecundaria);
+    display: flex;
+    width: 100%;
+    background-color: var(--colorAuxiliar4);
+    box-sizing: border-box;
+    font-size: 1.5rem;
+    padding: 0 5px 0 5px;
+    border-radius:  5px 5px 0 0;
+}
+
+.creador{
+    font-family: var(--fuenteSecundaria);
+    display: flex;
+    width: 100%;
+    background-color: var(--colorAuxiliar4);
+    box-sizing: border-box;
+    font-size: 1rem;
+    border-style: solid;
+    border-width: 2px 0px 2px 0px;
+    padding: 0 10px 0 10px;
+}
+
+.descripcion{
+    font-family: var(--fuenteSecundaria);
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 20px 10px 20px;
+}
+
+.respuestas{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.respuestas > li{
+    padding: 0px 20px 0px 20px;
+}
+
+.botonera {
+    width: 100%;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+.botonera > button {
+    margin: 10px;
+}
+
+.boton {
+    background-color: var(--colorContraste);
+    padding: 5px;
+    border-radius: 10px;
+    border-color: black;
+    border-width: 3px;
+}
+
+.secundario{
+    background-color: white;
+}
+
+
+.cardCommentary > app-Add-Reply {
+    width: 100%;
+}

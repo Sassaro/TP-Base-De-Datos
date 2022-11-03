@@ -1,0 +1,43 @@
+.cardReplica{
+    font-family: var(--fuenteSecundaria);
+    font-size: 0.8rem;
+    background-color: gainsboro;
+    border-style: solid;
+    margin: 5px 0 5px 0;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.detalle{
+    padding: 0 10px 0 10px;
+}
+
+.botonera {
+    width: 100%;
+}
+
+.botonera > button {
+    margin: 0px 10px 10px 10px;
+}
+
+.boton {
+    background-color: var(--colorContraste);
+    padding: 5px;
+    border-radius: 10px;
+    border-color: black;
+    border-width: 3px;
+}
+
+.secundario{
+    background-color: white;
+}
+
+.respuestas{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.respuestas > li{
+    padding: 0px 20px 0px 20px;
+}

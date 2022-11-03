@@ -1,0 +1,24 @@
+<div class="cardReplica">
+
+  <p>
+    Por: {{replica.apodo}}
+  </p>
+
+  <p class="detalle">
+    {{replica.detalle}}
+  </p>
+
+  <div class="botonera" >
+    <button *ngIf="replica.replicas.length != 0" (click)="showReplies()" class="boton"> Mostrar comentarios </button>
+    <button class="boton secundario" (click)="showAddReplyMenu()"> Agregar Replica </button>
+  </div>
+  
+  <app-Add-Reply [isOn]="isOnAddReply" [replyList]="replica.replicas"></app-Add-Reply>
+
+  <div *ngIf="isOn" class="respuestas">
+    <li *ngFor="let reply of replica.replicas">
+      <app-Card-Reply [replica]="reply"></app-Card-Reply>
+    </li>
+  </div>
+
+</div>

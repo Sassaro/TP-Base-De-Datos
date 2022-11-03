@@ -1,0 +1,10 @@
+<div *ngIf="isOn" class="CardAddReply">
+  <label> Apodo: </label>
+  <input class="input inputName" type="text" placeholder="Ingrese su apodo..." [(ngModel)]="reply.apodo">
+  <label> Descripcion: </label>
+  <input class="input inputReply" type="text" placeholder="Ingrese su comentario..." [(ngModel)]="reply.detalle">
+  <div class="botonera">
+    <button class="boton" (click)="saveReply()"> Guardar </button>
+  </div>
+  
+</div>

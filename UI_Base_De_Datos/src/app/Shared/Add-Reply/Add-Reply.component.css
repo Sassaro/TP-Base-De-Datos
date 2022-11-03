@@ -1,0 +1,36 @@
+.CardAddReply{
+    display: flex;
+    background-color: var(--fuenteSecundaria);
+    padding: 10px 20px 10px 20px;
+    flex-direction: column;
+    font-family: var(--fuenteSecundaria);
+}
+
+.input{
+    background-color: var(--fuenteSecundaria);
+    border-style: solid;
+    border-color: black;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.inputName{
+    width: 20%;
+    margin-bottom: 10px;
+}
+
+.inputReply{
+    width: 100%;
+}
+
+.botonera{
+    margin: 10px;
+    display: flex;
+    width: 20%;
+}
+
+.boton{
+    font-size: 1.2rem;
+    background-color: var(--colorContraste);
+    border-radius: 10px;
+}
