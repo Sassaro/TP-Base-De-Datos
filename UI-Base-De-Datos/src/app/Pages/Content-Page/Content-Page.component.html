@@ -1,0 +1,9 @@
+<app-Header [title]="'PAGINA CONTENIDOS'"></app-Header>
+
+<div class="conteinerCardContenido">
+
+  <div *ngFor="let content of contentList">
+    <app-Content-Card [contenido]="content"></app-Content-Card>
+  </div>
+
+</div>

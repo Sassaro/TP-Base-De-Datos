@@ -1,3 +1,4 @@
+import { FileService } from './../../Services/File.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Main_PageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private aux:FileService) { }
 
   ngOnInit() {
   }

@@ -1,0 +1,42 @@
+<div class="contentCard">
+
+  <div class="label labelTitulo">
+    Titulo:
+  </div>
+
+  <div class="contenido titulo">
+    {{contenido.Titulo}}
+  </div>
+
+  <div class="label labelExtension">
+    Extension:
+  </div>
+
+  <div class="contenido extension">
+    {{contenido.Extension}}
+  </div>
+
+  <div class="label labelFechaCreacion">
+    Fecha Creacion:
+  </div>
+
+  <div class="contenido">
+    {{contenido.Fecha_publicacion.toLocaleDateString()}}
+  </div>
+
+  <div class="label labelComentarios">
+    Comentarios:
+  </div>
+
+  <div class="contenido comentarios">
+    <a *ngIf="contenido.comentarios.length!=0; else SinComentarios" href="./ABM_Page/{{contenido.idArchivo}}">
+      {{contenido.comentarios.length}} Comentarios
+    </a>
+
+    <ng-template #SinComentarios>
+      {{contenido.comentarios.length}} Comentarios
+    </ng-template>
+
+  </div>
+
+</div>

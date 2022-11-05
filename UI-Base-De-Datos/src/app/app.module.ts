@@ -1,3 +1,5 @@
+import { ContentCardComponent } from './Shared/Content-Card/Content-Card.component';
+import { ContentPageComponent } from './Pages/Content-Page/Content-Page.component';
 import { AddReplyComponent } from './Shared/Add-Reply/Add-Reply.component';
 import { CardReplyComponent } from './Shared/Card-Reply/Card-Reply.component';
 import { CardCommentaryComponent } from './Shared/Card-Commentary/Card-Commentary.component';
@@ -13,6 +15,7 @@ import { AMB_PageComponent } from './Pages/AMB_Page/AMB_Page.component'
 import { Main_PageComponent } from './Pages/Main_Page/Main_Page.component'
 import { Report_PageComponent } from './Pages/Report_Page/Report_Page.component'
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,12 +27,15 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     CardCommentaryComponent,
     CardReplyComponent,
-    AddReplyComponent
+    AddReplyComponent,
+    ContentPageComponent,
+    ContentCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
