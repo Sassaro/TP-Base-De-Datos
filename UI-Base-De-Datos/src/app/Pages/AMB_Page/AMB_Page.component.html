@@ -2,10 +2,8 @@
 <app-Header [title]="'PAGINA ABM'"></app-Header>
 
   <div class="commentaryContainer">
-    <app-Card-Commentary></app-Card-Commentary>
-    <app-Card-Commentary></app-Card-Commentary>
-    <app-Card-Commentary></app-Card-Commentary>
-    <app-Card-Commentary></app-Card-Commentary>
-    <app-Card-Commentary></app-Card-Commentary>
+    <div *ngFor="let comentario of commentList">
+        <app-Card-Commentary [comentario]="comentario"></app-Card-Commentary>
+    </div>
   </div>
 

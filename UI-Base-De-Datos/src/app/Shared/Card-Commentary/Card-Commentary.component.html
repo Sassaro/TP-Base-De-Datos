@@ -2,16 +2,16 @@
   <div class="titulo">{{comentario.titulo}}:</div>
   <div class="creador">Por: {{comentario.apodo}}</div>
   <div class="descripcion"> {{comentario.descripcion}} </div>
-  <div *ngIf="comentario.replicas.length != 0" class="botonera">
+  <div class="botonera">
     <button *ngIf="comentario.replicas.length != 0" class="boton" (click)="showReplies()"> Mostrar Replicas </button>
     <button class="boton secundario" (click)="showAddReplyMenu()"> Agregar Replica </button>
   </div>
 
-  <app-Add-Reply [isOn]="isOnAddReply" [replyList]="comentario.replicas"></app-Add-Reply>
+  <app-Add-Reply [isOn]="isOnAddReply" [replyList]="comentario.replicas" [idComentarioPadre]="comentario.id"></app-Add-Reply>
 
   <div *ngIf="isOn" class="respuestas">
     <li *ngFor="let reply of comentario.replicas">
-      <app-Card-Reply [replica]="reply"></app-Card-Reply>
+      <app-Card-Reply [replica]="reply" [idComentarioPadre]="comentario.id"></app-Card-Reply>
     </li>
   </div>
 

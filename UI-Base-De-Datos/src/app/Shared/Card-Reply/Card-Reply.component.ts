@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Replica } from 'Domain/Replica';
+import { ReplyService } from 'src/app/Services/Reply.service';
 
 @Component({
   selector: 'app-Card-Reply',
@@ -9,12 +10,21 @@ import { Replica } from 'Domain/Replica';
 export class CardReplyComponent implements OnInit {
 
   @Input() replica!:Replica
+  @Input() idReplicaPadre!:number
+  @Input() idComentarioPadre!:number
   isOn:boolean = false
   isOnAddReply:boolean = false
 
-  constructor() { }
+  constructor(private replyService:ReplyService) { }
 
   ngOnInit() {
+
+    this.getRepliesOfReplies()
+
+  }
+
+  async getRepliesOfReplies() {
+    this.replica.replicas = await this.replyService.getRepliesByReplyId(this.replica.id)
   }
 
   showReplies(){

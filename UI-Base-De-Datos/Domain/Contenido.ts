@@ -1,27 +1,11 @@
 import { Comentario } from './Comentario';
 
-export type ContenidoEntityJSON = {
-
-    Extension:string
-    Fecha_publicacion:Date
-    Titulo:string
-    idArchivo:number
-
-}
-
 export class ContenidoEntity{
 
     Extension!:string
-    Fecha_publicacion!:Date
+    Fecha_Publicacion!:Date
     Titulo!:string
     idArchivo!:number
-
-    static fromJson(contenidoEntityJSON: ContenidoEntityJSON): ContenidoEntity {
-        let contenidoEntity = Object.assign(new ContenidoEntity(), contenidoEntityJSON)
-        contenidoEntity.Fecha_publicacion = new Date(contenidoEntityJSON.Fecha_publicacion)
-        console.log(contenidoEntityJSON.Fecha_publicacion)
-        return contenidoEntity
-    }
 
 }
 
@@ -43,7 +27,9 @@ export class Contenido {
 
     static fromEntity(contenidoEntity:ContenidoEntity):Contenido{
 
-        let contenido = Object.assign(new Contenido(0,"","",contenidoEntity.Fecha_publicacion,[]),contenidoEntity)
+        console.log(contenidoEntity.Fecha_Publicacion)
+        let contenido = Object.assign(new Contenido(0,"","",contenidoEntity.Fecha_Publicacion,[]),contenidoEntity)
+        contenido.Fecha_publicacion = new Date(contenidoEntity.Fecha_Publicacion)
         return contenido
     }
 

@@ -13,11 +13,11 @@
     <button class="boton secundario" (click)="showAddReplyMenu()"> Agregar Replica </button>
   </div>
   
-  <app-Add-Reply [isOn]="isOnAddReply" [replyList]="replica.replicas"></app-Add-Reply>
+  <app-Add-Reply [isOn]="isOnAddReply" [replyList]="replica.replicas" [idReplicaPadre]="replica.id"></app-Add-Reply>
 
   <div *ngIf="isOn" class="respuestas">
     <li *ngFor="let reply of replica.replicas">
-      <app-Card-Reply [replica]="reply"></app-Card-Reply>
+      <app-Card-Reply [replica]="reply" [idReplicaPadre]="replica.id"></app-Card-Reply>
     </li>
   </div>
 

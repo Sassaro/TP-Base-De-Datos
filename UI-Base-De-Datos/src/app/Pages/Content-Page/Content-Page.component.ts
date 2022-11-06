@@ -1,5 +1,6 @@
+import { CommentService } from './../../Services/Comment.service';
 import { FileService } from './../../Services/File.service';
-import { Contenido, ContenidoEntity } from './../../../../Domain/Contenido';
+import { Contenido } from './../../../../Domain/Contenido';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,10 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentPageComponent implements OnInit {
 
-  contentList:Contenido[] = [ new Contenido(-1,"Skyrim 100% real no fake",".txt",new Date(),[])]
-  aux!:any 
+  contentList:Contenido[] = []
 
-  constructor(private contentService:FileService) { }
+  constructor(private contentService:FileService, private commentService:CommentService) { }
 
   ngOnInit() {
 
@@ -21,9 +21,12 @@ export class ContentPageComponent implements OnInit {
   }
 
   async getContents() {
-    const aux = await this.contentService.getContents()
-    this.contentList = aux.map( (it) => Contenido.fromEntity(it) )
-    console.log(this.contentList[0].Fecha_publicacion)
+    this.contentList= await this.contentService.getContents()
+    this.getContentsComments()
+  }
+
+  getContentsComments(){
+    this.contentList.forEach( async (it) => { it.comentarios = await this.commentService.getCommentsByFileId(it.idArchivo) } )
   }
 
 }

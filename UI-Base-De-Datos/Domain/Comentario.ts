@@ -1,5 +1,16 @@
 import { Replica } from './Replica';
 
+export class ComentarioEntity{
+
+    idComentario!:number
+    Apodo_Creador!:string
+    Descripcion!:string
+    Titulo!:string
+    Archivo_idArchivo!:number
+
+}
+
+
 export class Comentario{
 
     id!:number
@@ -14,6 +25,10 @@ export class Comentario{
         this.descripcion = _descripcion
         this.titulo = _titulo
         this.replicas = _replicas
+    }
+
+    static fromEntity(comentarioEntity:ComentarioEntity):Comentario{
+        return new Comentario(comentarioEntity.idComentario,comentarioEntity.Apodo_Creador,comentarioEntity.Descripcion,comentarioEntity.Titulo,[])
     }
 
 }
