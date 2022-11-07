@@ -26,6 +26,14 @@ export class ReplyService {
     await lastValueFrom(this.httpClient.post('http://localhost:8080/agregarReplica', Replica.toEntity(replica)))
   }
 
+  async updateReply(replica:Replica,id:number){
+    await lastValueFrom(this.httpClient.patch('http://localhost:8080/actualizarReplica/' + id, Replica.toEntity(replica)))
+  }
+
+  async deleteReply(id:number){
+    await lastValueFrom(this.httpClient.delete('http://localhost:8080/quitarReplica/' + id))
+  }
+
 
 }
 

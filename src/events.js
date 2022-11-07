@@ -62,7 +62,37 @@ function createRouter(db) {
   router.post('/agregarReplica', (req, res, next) => {
     db.query(
       'INSERT INTO replica (Detalle, Apodo, Replica_idReplica, Comentario_idComentario) VALUES (?,?,?,?)',
-      [req.body.Detalle, req.body.Apodo, req.body.Replica_idReplica,req.body.Comentario_idComentario ],
+      [ req.body.Detalle, req.body.Apodo, req.body.Replica_idReplica,req.body.Comentario_idComentario ],
+      (error) => {
+        if (error) {
+          console.error(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json({status: 'ok'});
+        }
+      }
+    );
+  });
+
+  router.patch('/actualizarReplica/:id', function (req, res, next) {
+    db.query(
+      'UPDATE replica SET Detalle=?, Apodo=? WHERE replica.idReplica = ?',
+      [ req.body.Detalle, req.body.Apodo, req.params.id ],
+      (error) => {
+        if (error) {
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json({status: 'ok'});
+        }
+      }
+    );
+  });
+
+  //quita una replica de la base de datos
+  router.delete('/quitarReplica/:id', (req, res, next) => {
+    db.query(
+      'DELETE from replica where replica.idReplica = ?',
+      [req.params.id],
       (error) => {
         if (error) {
           console.error(error);

@@ -6,8 +6,9 @@ export class ReplicaEntity {
     Replica_idReplica!:number
     Comentario_idComentario!:number
 
-    constructor(_detalle:string,_apodo:string,_idReplica:number,_idComentario:number){
+    constructor(_id:number,_detalle:string,_apodo:string,_idReplica:number,_idComentario:number){
 
+        this.idReplica = _id
         this.Detalle = _detalle
         this.Apodo = _apodo
         this.Replica_idReplica = _idReplica
@@ -40,7 +41,7 @@ export class Replica {
     }
 
     static toEntity(replica:Replica):ReplicaEntity{
-        return new ReplicaEntity(replica.detalle,replica.apodo,replica.idreplica,replica.idComentario)
+        return new ReplicaEntity(replica.id,replica.detalle,replica.apodo,replica.idreplica,replica.idComentario)
     }
 
 }

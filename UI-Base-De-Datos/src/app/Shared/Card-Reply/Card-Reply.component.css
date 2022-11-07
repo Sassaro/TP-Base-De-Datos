@@ -41,3 +41,12 @@
 .respuestas > li{
     padding: 0px 20px 0px 20px;
 }
+
+.iconoClicable {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.botonBorrar{
+    color: brown;
+}

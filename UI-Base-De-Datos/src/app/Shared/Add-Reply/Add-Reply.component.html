@@ -4,7 +4,10 @@
   <label> Descripcion: </label>
   <input class="input inputReply" type="text" placeholder="Ingrese su comentario..." [(ngModel)]="reply.detalle">
   <div class="botonera">
-    <button class="boton" (click)="saveReply()"> Guardar </button>
+    <button *ngIf="!edit; else editButton" class="boton" (click)="saveReply()"> Guardar </button>
+    <ng-template #editButton>
+      <button class="boton" (click)="updateReply()"> Actualizar </button>
+    </ng-template>
   </div>
   
 </div>

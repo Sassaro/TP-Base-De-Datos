@@ -1,6 +1,6 @@
 import { ReplyService } from 'src/app/Services/Reply.service';
 import { Replica } from './../../../../Domain/Replica';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-Add-Reply',
@@ -13,6 +13,9 @@ export class AddReplyComponent implements OnInit {
   @Input() replyList!:Replica[]
   @Input() idReplicaPadre!:number
   @Input() idComentarioPadre!:number
+  @Input() edit:boolean = false
+  @Input() replyToEdit!:Replica
+  @Output() onClick = new EventEmitter<boolean>();
   reply:Replica = new Replica(-1,"","",[],0,0)
   
 
@@ -21,20 +24,34 @@ export class AddReplyComponent implements OnInit {
   ngOnInit() {
     this.reply.idComentario = this.idComentarioPadre
     this.reply.idreplica = this.idReplicaPadre
+
+    if(this.edit){
+      this.reply = this.replyToEdit
+    }
+
   }
 
-  saveReply(){
+  async saveReply(){
 
     if(!this.validateReply()){
-      //hace una deep copy del objeto
-      const aux = JSON.stringify(this.reply)
-      const aux2:Replica = JSON.parse(aux)
+      const replica = this.deepCopy(this.reply)
+
       this.replyService.addReply(this.reply)
-      this.replyList.push(aux2)
+      this.replyList.push(replica)
+      
       this.resetInputs()
     }else{
       throw new Error("No se puede ingresar un comentario sin apodo o vacio")
     }
+  }
+
+  async updateReply(){
+    await this.replyService.updateReply(this.reply,this.reply.id)
+    this.close()
+  }
+
+  close(){
+    this.onClick.emit(false)
   }
 
   resetInputs(){
@@ -44,6 +61,11 @@ export class AddReplyComponent implements OnInit {
 
   validateReply(){
     return this.reply.apodo == "" || this.reply.detalle == ""
+  }
+
+  deepCopy(replica:Replica):Replica{
+    const aux = JSON.stringify(replica)
+    return JSON.parse(aux)
   }
 
 }

@@ -11,7 +11,7 @@
 
   <div *ngIf="isOn" class="respuestas">
     <li *ngFor="let reply of comentario.replicas">
-      <app-Card-Reply [replica]="reply" [idComentarioPadre]="comentario.id"></app-Card-Reply>
+      <app-Card-Reply [replica]="reply" [idComentarioPadre]="comentario.id" [replyList]="comentario.replicas"></app-Card-Reply>
     </li>
   </div>
 

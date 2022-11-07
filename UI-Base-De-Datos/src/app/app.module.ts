@@ -16,6 +16,7 @@ import { Main_PageComponent } from './Pages/Main_Page/Main_Page.component'
 import { Report_PageComponent } from './Pages/Report_Page/Report_Page.component'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -29,13 +30,14 @@ import { HttpClientModule } from '@angular/common/http';
     CardReplyComponent,
     AddReplyComponent,
     ContentPageComponent,
-    ContentCardComponent
+    ContentCardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

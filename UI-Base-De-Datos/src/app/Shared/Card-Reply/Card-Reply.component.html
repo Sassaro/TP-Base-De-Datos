@@ -1,7 +1,9 @@
-<div class="cardReplica">
+<div *ngIf="!editing; else edit" class="cardReplica">
 
   <p>
     Por: {{replica.apodo}}
+    <fa-icon class = "iconoClicable botonBorrar" [icon]="faTrashCan" (click)="deleteReply()"  ></fa-icon>
+    <fa-icon class = "iconoClicable" [icon]="faPen" (click)="showEditReplyMenu()" ></fa-icon>
   </p>
 
   <p class="detalle">
@@ -17,8 +19,12 @@
 
   <div *ngIf="isOn" class="respuestas">
     <li *ngFor="let reply of replica.replicas">
-      <app-Card-Reply [replica]="reply" [idReplicaPadre]="replica.id"></app-Card-Reply>
+      <app-Card-Reply [replica]="reply" [idReplicaPadre]="replica.id" [replyList]="replica.replicas"></app-Card-Reply>
     </li>
   </div>
 
 </div>
+
+<ng-template #edit>
+  <app-Add-Reply [isOn]="editing" [edit]="true" [replyToEdit]="replica" (onClick)="editing = $event"></app-Add-Reply>
+</ng-template>
