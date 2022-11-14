@@ -1,3 +1,4 @@
+import { mostrarError } from 'Domain/GlobalErrorHandler';
 import { ReplyService } from 'src/app/Services/Reply.service';
 import { Replica } from './../../../../Domain/Replica';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -17,6 +18,7 @@ export class AddReplyComponent implements OnInit {
   @Input() replyToEdit!:Replica
   @Output() onClick = new EventEmitter<boolean>();
   reply:Replica = new Replica(-1,"","",[],0,0)
+  errors = []
   
 
   constructor(private replyService:ReplyService) { }
@@ -36,12 +38,17 @@ export class AddReplyComponent implements OnInit {
     if(!this.validateReply()){
       const replica = this.deepCopy(this.reply)
 
-      this.replyService.addReply(this.reply)
+      await this.replyService.addReply(this.reply)
+
+      const aux = await this.replyService.lastId()
+
+      replica.id = aux[0].LastID
+
       this.replyList.push(replica)
-      
+
       this.resetInputs()
     }else{
-      throw new Error("No se puede ingresar un comentario sin apodo o vacio")
+      mostrarError(this,new Error("No se puede ingresar un comentario sin apodo o vacio"))
     }
   }
 

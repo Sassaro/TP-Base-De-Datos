@@ -1,3 +1,4 @@
+import { LastIdEntity } from './../../../Domain/LastIdEntity';
 import { Replica, ReplicaEntity } from './../../../Domain/Replica';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -34,6 +35,11 @@ export class ReplyService {
     await lastValueFrom(this.httpClient.delete('http://localhost:8080/quitarReplica/' + id))
   }
 
+  async lastId(){
+    const id$ = this.httpClient.get<LastIdEntity[]>(`http://localhost:8080/ultimoId`);
+    const id = await lastValueFrom(id$)
+    return id
+  }
 
 }
 

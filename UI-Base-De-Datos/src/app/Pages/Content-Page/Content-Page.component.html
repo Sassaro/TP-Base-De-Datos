@@ -2,7 +2,9 @@
 
 <div class="conteinerCardContenido">
 
-  <div *ngFor="let content of contentList">
+  <app-Date-Filter (search)="receiver($event)" ></app-Date-Filter>
+
+  <div *ngFor="let content of contentList | dateFilter: fechaBuscada">
     <app-Content-Card [contenido]="content"></app-Content-Card>
   </div>
 

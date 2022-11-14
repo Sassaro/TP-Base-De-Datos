@@ -26,4 +26,12 @@ export class CardCommentaryComponent implements OnInit {
     this.isOnAddReply = !this.isOnAddReply
   }
 
+  buttonText(){
+    if(this.isOn){
+      return "Ocultar Replicas"
+    }else{
+      return "Mostrar Replicas"
+    }
+  }
+
 }

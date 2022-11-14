@@ -1,0 +1,22 @@
+.containerCardDateFilter{
+    width: 70vw;
+}
+
+.cardDateFilter{
+    width: fit-content;
+    border-radius: 5px;
+    display: flex;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: var(--colorAuxiliar4);
+    font-family: var(--fuenteSecundaria);
+    border-style: solid;
+    font-size: 1.5rem;
+}
+
+.inputFecha{
+    font-size: 1.5rem;
+    border-radius: 5px;
+    margin-left: 10px;
+}

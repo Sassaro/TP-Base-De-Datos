@@ -1,0 +1,40 @@
+
+<div class="containerReportTable">
+
+  <div class="titulos">
+    <li>
+      Replica:
+    </li>
+    <li>
+      Nro. Replicas:
+    </li>
+    <li>
+      Comentario:
+    </li>
+    <li>
+      Archivo:
+    </li>
+  </div>
+  <div class="reportTable">
+    <div class="reportRow" *ngFor="let item of tableItems">
+      <li class="replyItem">
+        Por: {{item.Apodo}} <br>
+        <P class="descripcion">-{{item.Detalle}}</P> 
+      </li>
+      <li class="replyItem">
+        {{item.cantidad_replicas}}
+      </li>
+      <li class="commentaryItem">
+        Por: {{item.Apodo_creador}} <br>
+        <P class="descripcion">-{{item.Descripcion}}</P> 
+      </li>
+      <li>
+        <a href="/ABM_Page/{{item.idArchivo}}">
+          {{item.Titulo}}
+        </a>
+      </li>
+    </div>
+
+  </div>
+
+</div>

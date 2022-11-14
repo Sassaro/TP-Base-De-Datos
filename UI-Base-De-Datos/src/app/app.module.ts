@@ -1,3 +1,5 @@
+import { DateFilterComponent } from './Shared/Date-Filter/Date-Filter.component';
+import { DateFilterPipe } from './Pipes/Date-Filter.pipe';
 import { ContentCardComponent } from './Shared/Content-Card/Content-Card.component';
 import { ContentPageComponent } from './Pages/Content-Page/Content-Page.component';
 import { AddReplyComponent } from './Shared/Add-Reply/Add-Reply.component';
@@ -17,6 +19,8 @@ import { Report_PageComponent } from './Pages/Report_Page/Report_Page.component'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReportTableComponent } from './Shared/Report-Table/Report-Table.component';
+import { Error_CardComponent } from './Shared/Error_Card/Error_Card.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AddReplyComponent,
     ContentPageComponent,
     ContentCardComponent,
+    DateFilterComponent,
+    DateFilterPipe,
+    ReportTableComponent,
+    Error_CardComponent
   ],
   imports: [
     BrowserModule,

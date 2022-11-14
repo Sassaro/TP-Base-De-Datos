@@ -3,7 +3,7 @@
   <div class="creador">Por: {{comentario.apodo}}</div>
   <div class="descripcion"> {{comentario.descripcion}} </div>
   <div class="botonera">
-    <button *ngIf="comentario.replicas.length != 0" class="boton" (click)="showReplies()"> Mostrar Replicas </button>
+    <button *ngIf="comentario.replicas.length != 0" class="boton" (click)="showReplies()"> {{buttonText()}} </button>
     <button class="boton secundario" (click)="showAddReplyMenu()"> Agregar Replica </button>
   </div>
 

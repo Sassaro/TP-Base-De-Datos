@@ -11,7 +11,7 @@
   </p>
 
   <div class="botonera" >
-    <button *ngIf="replica.replicas.length != 0" (click)="showReplies()" class="boton"> Mostrar comentarios </button>
+    <button *ngIf="replica.replicas.length != 0" (click)="showReplies()" class="boton"> {{buttonText()}} </button>
     <button class="boton secundario" (click)="showAddReplyMenu()"> Agregar Replica </button>
   </div>
   
@@ -28,3 +28,5 @@
 <ng-template #edit>
   <app-Add-Reply [isOn]="editing" [edit]="true" [replyToEdit]="replica" (onClick)="editing = $event"></app-Add-Reply>
 </ng-template>
+
+<app-Error_Card [errorList]="errors"></app-Error_Card>

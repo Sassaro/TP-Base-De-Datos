@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ContentPageComponent implements OnInit {
 
   contentList:Contenido[] = []
+  fechaBuscada!:string
 
   constructor(private contentService:FileService, private commentService:CommentService) { }
 
@@ -29,4 +30,7 @@ export class ContentPageComponent implements OnInit {
     this.contentList.forEach( async (it) => { it.comentarios = await this.commentService.getCommentsByFileId(it.idArchivo) } )
   }
 
+  receiver(receivedFromChild:string){
+    this.fechaBuscada = receivedFromChild
+  }
 }
