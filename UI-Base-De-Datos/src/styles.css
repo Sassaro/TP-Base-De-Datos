@@ -37,6 +37,21 @@ html {
     margin: 0;
 }
 
+.botonVolver{
+    padding: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: black;
+}
+
+.containerBotonVolver {
+    display: flex;
+    position: relative;
+    right: 35%;
+    text-decoration: none;
+}
+
 .footer{
     display: flex;
     align-items: center;

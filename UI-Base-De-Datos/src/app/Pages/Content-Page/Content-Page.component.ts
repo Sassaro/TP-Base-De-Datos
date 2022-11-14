@@ -12,6 +12,7 @@ export class ContentPageComponent implements OnInit {
 
   contentList:Contenido[] = []
   fechaBuscada!:string
+  tituloBuscado!:string
 
   constructor(private contentService:FileService, private commentService:CommentService) { }
 
@@ -32,5 +33,6 @@ export class ContentPageComponent implements OnInit {
 
   receiver(receivedFromChild:string){
     this.fechaBuscada = receivedFromChild
+    this.tituloBuscado = receivedFromChild
   }
 }

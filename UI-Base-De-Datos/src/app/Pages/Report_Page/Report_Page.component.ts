@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Report_PageComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit() {

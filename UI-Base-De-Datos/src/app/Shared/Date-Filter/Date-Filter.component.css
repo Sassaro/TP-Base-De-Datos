@@ -12,11 +12,14 @@
     background-color: var(--colorAuxiliar4);
     font-family: var(--fuenteSecundaria);
     border-style: solid;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    width: 100%;
+    align-items: center;
 }
 
 .inputFecha{
     font-size: 1.5rem;
     border-radius: 5px;
     margin-left: 10px;
+    margin-right: 10px;
 }

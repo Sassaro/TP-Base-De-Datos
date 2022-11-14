@@ -1,6 +1,7 @@
 import { ReportEntity } from './../../../../Domain/ReportEntity';
 import { ReportService } from './../../Services/Report.service';
 import { Component, OnInit } from '@angular/core';
+import { faLink } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-Report-Table',
@@ -10,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ReportTableComponent implements OnInit {
 
   tableItems!:ReportEntity[]
+  faLink = faLink
 
   constructor(private reportService:ReportService) { }
 

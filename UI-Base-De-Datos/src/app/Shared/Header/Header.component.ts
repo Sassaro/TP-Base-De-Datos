@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   @Input() title!:string;
+  @Input() url!:string;
+  @Input() show:boolean = true;
 
   constructor() { }
 
