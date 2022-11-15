@@ -1,0 +1,290 @@
+#Este archivo contiene el script que crea la base de datos y ademas contiene un info dump que permite inicializar ciertos valores en la base de datos
+
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Archivo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Archivo` (
+  `idArchivo` INT NOT NULL AUTO_INCREMENT,
+  `Extension` VARCHAR(45) NOT NULL,
+  `Fecha_Publicacion` DATE NOT NULL,
+  `Titulo` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idArchivo`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Categoria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Categoria` (
+  `idCategoria` INT NOT NULL AUTO_INCREMENT,
+  `Descripcion` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idCategoria`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Comentario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Comentario` (
+  `idComentario` INT NOT NULL AUTO_INCREMENT,
+  `Apodo_Creador` VARCHAR(45) NOT NULL,
+  `Descripcion` VARCHAR(45) NOT NULL,
+  `Titulo` VARCHAR(45) NOT NULL,
+  `Archivo_idArchivo` INT NOT NULL,
+  PRIMARY KEY (`idComentario`, `Archivo_idArchivo`),
+  INDEX `fk_Comentario_Archivo1_idx` (`Archivo_idArchivo` ASC) VISIBLE,
+  CONSTRAINT `fk_Comentario_Archivo1`
+    FOREIGN KEY (`Archivo_idArchivo`)
+    REFERENCES `mydb`.`Archivo` (`idArchivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Replica`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Replica` (
+  `idReplica` INT NOT NULL AUTO_INCREMENT,
+  `Detalle` VARCHAR(45) NOT NULL,
+  `Apodo` VARCHAR(45) NOT NULL,
+  `Replica_idReplica` INT NULL,
+  `Comentario_idComentario` INT NULL,
+  PRIMARY KEY (`idReplica`),
+  INDEX `fk_Replica_Replica1_idx` (`Replica_idReplica` ASC) VISIBLE,
+  INDEX `fk_Replica_Comentario1_idx` (`Comentario_idComentario` ASC) VISIBLE,
+  CONSTRAINT `fk_Replica_Replica1`
+    FOREIGN KEY (`Replica_idReplica`)
+    REFERENCES `mydb`.`Replica` (`idReplica`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Replica_Comentario1`
+    FOREIGN KEY (`Comentario_idComentario`)
+    REFERENCES `mydb`.`Comentario` (`idComentario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Solo_Descargables`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Solo_Descargables` (
+  `Archivo_idArchivo` INT NOT NULL,
+  PRIMARY KEY (`Archivo_idArchivo`),
+  INDEX `fk_Solo_Descargables_Archivo1_idx` (`Archivo_idArchivo` ASC) VISIBLE,
+  CONSTRAINT `fk_Solo_Descargables_Archivo1`
+    FOREIGN KEY (`Archivo_idArchivo`)
+    REFERENCES `mydb`.`Archivo` (`idArchivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Video`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Video` (
+  `Archivo_idArchivo` INT NOT NULL,
+  PRIMARY KEY (`Archivo_idArchivo`),
+  CONSTRAINT `fk_Video_Archivo1`
+    FOREIGN KEY (`Archivo_idArchivo`)
+    REFERENCES `mydb`.`Archivo` (`idArchivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Usuario` (
+  `idUsuario` INT NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Apellido` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idUsuario`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Reproduccion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Reproduccion` (
+  `idReproducciones` INT NOT NULL AUTO_INCREMENT,
+  `Sistema Operativo` VARCHAR(45) NOT NULL,
+  `Inicio_Reproduccion` TIME NOT NULL,
+  `Fin_Reproduccion` TIME NOT NULL,
+  `Video_Archivo_idArchivo` INT NOT NULL,
+  `Usuario_idUsuario` INT NOT NULL,
+  PRIMARY KEY (`idReproducciones`, `Video_Archivo_idArchivo`, `Usuario_idUsuario`),
+  INDEX `fk_Reproduccion_Video1_idx` (`Video_Archivo_idArchivo` ASC) VISIBLE,
+  INDEX `fk_Reproduccion_Usuario1_idx` (`Usuario_idUsuario` ASC) VISIBLE,
+  CONSTRAINT `fk_Reproduccion_Video1`
+    FOREIGN KEY (`Video_Archivo_idArchivo`)
+    REFERENCES `mydb`.`Video` (`Archivo_idArchivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Reproduccion_Usuario1`
+    FOREIGN KEY (`Usuario_idUsuario`)
+    REFERENCES `mydb`.`Usuario` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Descarga`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Descarga` (
+  `idDescarga` INT NOT NULL AUTO_INCREMENT,
+  `Velocidad` VARCHAR(45) NOT NULL,
+  `Solo_Descargables_Archivo_idArchivo` INT NOT NULL,
+  `Usuario_idUsuario` INT NOT NULL,
+  PRIMARY KEY (`idDescarga`, `Solo_Descargables_Archivo_idArchivo`, `Usuario_idUsuario`),
+  INDEX `fk_Descarga_Solo_Descargables1_idx` (`Solo_Descargables_Archivo_idArchivo` ASC) VISIBLE,
+  INDEX `fk_Descarga_Usuario1_idx` (`Usuario_idUsuario` ASC) VISIBLE,
+  CONSTRAINT `fk_Descarga_Solo_Descargables1`
+    FOREIGN KEY (`Solo_Descargables_Archivo_idArchivo`)
+    REFERENCES `mydb`.`Solo_Descargables` (`Archivo_idArchivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Descarga_Usuario1`
+    FOREIGN KEY (`Usuario_idUsuario`)
+    REFERENCES `mydb`.`Usuario` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Encuesta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Encuesta` (
+  `idEncuesta` INT NOT NULL AUTO_INCREMENT,
+  `Puntaje` VARCHAR(45) NOT NULL,
+  `Resumen_Positivo` VARCHAR(45) NOT NULL,
+  `Resumen_Negativo` VARCHAR(45) NOT NULL,
+  `Descarga_idDescarga` INT NOT NULL,
+  PRIMARY KEY (`idEncuesta`, `Descarga_idDescarga`),
+  INDEX `fk_Encuesta_Descarga1_idx` (`Descarga_idDescarga` ASC) VISIBLE,
+  CONSTRAINT `fk_Encuesta_Descarga1`
+    FOREIGN KEY (`Descarga_idDescarga`)
+    REFERENCES `mydb`.`Descarga` (`idDescarga`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Categoria_has_Archivo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Categoria_has_Archivo` (
+  `Categoria_idCategoria` INT NOT NULL,
+  `Archivo_idArchivo` INT NOT NULL,
+  PRIMARY KEY (`Categoria_idCategoria`, `Archivo_idArchivo`),
+  INDEX `fk_Categoria_has_Archivo_Archivo1_idx` (`Archivo_idArchivo` ASC) VISIBLE,
+  INDEX `fk_Categoria_has_Archivo_Categoria1_idx` (`Categoria_idCategoria` ASC) VISIBLE,
+  CONSTRAINT `fk_Categoria_has_Archivo_Categoria1`
+    FOREIGN KEY (`Categoria_idCategoria`)
+    REFERENCES `mydb`.`Categoria` (`idCategoria`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Categoria_has_Archivo_Archivo1`
+    FOREIGN KEY (`Archivo_idArchivo`)
+    REFERENCES `mydb`.`Archivo` (`idArchivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Musica`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Musica` (
+  `Solo_Descargables_Archivo_idArchivo` INT NOT NULL,
+  PRIMARY KEY (`Solo_Descargables_Archivo_idArchivo`),
+  CONSTRAINT `fk_Musica_Solo_Descargables1`
+    FOREIGN KEY (`Solo_Descargables_Archivo_idArchivo`)
+    REFERENCES `mydb`.`Solo_Descargables` (`Archivo_idArchivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Documentos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Documentos` (
+  `Solo_Descargables_Archivo_idArchivo` INT NOT NULL,
+  PRIMARY KEY (`Solo_Descargables_Archivo_idArchivo`),
+  CONSTRAINT `fk_Documentos_Solo_Descargables1`
+    FOREIGN KEY (`Solo_Descargables_Archivo_idArchivo`)
+    REFERENCES `mydb`.`Solo_Descargables` (`Archivo_idArchivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+-- insert de archivos --
+insert into archivo (extension,Fecha_Publicacion,Titulo) values
+	(".mp3","2021-5-4","Musica Rock"),
+    (".mp3","2020-2-10","Musica Pop"),
+    (".MOV","2021-9-12","Pelicula"),
+    (".docx","2022-11-5","Resumen Parcial Base de datos"),
+    (".txt","2019-2-4","Resumen Parcial Matematica I"),
+    (".txt","2019-5-8","Respuestas Parcial Matematica I");
+
+-- insert de comentarios --
+
+insert into comentario (Apodo_Creador,Descripcion,Titulo,Archivo_idArchivo) values 
+	("Pepe","Esta buena la cancion.","opinion", 1),
+	("Federico","Esta muy buena la cancion.","opinion", 2),
+    ("Tomas","Tiene mala calidad","Se ve mal la pelicula", 3),
+    ("Ivan","La calidad de la pelicula es muy mala.","Se ve muy mal", 3),
+	("Jose","Esta bueno.","Muy bueno el resumen", 4),
+    ("Stefan","Gracias a este resumen aprobe.","Muy bueno el resumen", 5),
+    ("Tomas","Desaprobe igual","No me sirvio", 5);
+    
+-- insert de replicas de comentarios --
+
+insert into replica (Detalle,Apodo,Comentario_idComentario) values 
+	("Estoy de acuerdo, muy buena la cancion","Armando",1),
+    ("Es muy mala la cancion","Susana",2),
+    ("Si, se ve muy mal","Armando",3),
+    ("Yo lo veo bien","Juan",3),
+    ("Si, es muy bueno el resumen","Miguel",6);
+
+-- insert de replicas de replicas  --
+    
+insert into replica (Detalle,Apodo,Replica_idReplica) values 
+	("Para mi es bastante mala","Matías",1),
+    ("No esta tan mal","Pepe",2),
+    ("Esta Bien","Jose",2),
+    ("Es normal","Lucas",2),
+	("Si, no es muy buena","Joaquín",2),
+    ("Yo lo veo bien","Luis",3),
+    ("Si, se ve muy mal","Alberto",3),
+    ("Se ve mal","Alejandro",4);
